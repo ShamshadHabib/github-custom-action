@@ -1,6 +1,11 @@
 name: 'Get & Cache (npm) Dependencies'
 description: 'Get the dependecies (via npm) and cache them'
-
+inputs:
+  shouldCache:
+    description: Flag will decide to cache or not
+    required: false
+    default: 'true'
+    
 runs:
     using: 'composite'
     steps:
@@ -10,6 +15,9 @@ runs:
         with:
             path: node_modules
             key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: input value 
+        run: echo "shouldCache: ${{inputs.shouldCache}}"
+        shell: bash
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
