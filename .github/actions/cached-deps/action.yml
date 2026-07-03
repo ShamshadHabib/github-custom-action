@@ -16,7 +16,7 @@ runs:
             path: node_modules
             key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: input value 
-        run: echo "shouldCache: ${{inputs.shouldCache}}"
+        run: echo "shouldCache ${{inputs.shouldCache}}"
         shell: bash
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
