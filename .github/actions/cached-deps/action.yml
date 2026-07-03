@@ -10,6 +10,7 @@ runs:
     using: 'composite'
     steps:
       - name: Cache dependencies
+        if: inputs.shouldCache
         id: cache
         uses: actions/cache@v6
         with:
@@ -19,6 +20,6 @@ runs:
         run: echo "shouldCache ${{inputs.shouldCache}}"
         shell: bash
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
+        if: steps.cache.outputs.cache-hit != 'true' || inputs.shouldCache
         run: npm ci
         shell: bash
