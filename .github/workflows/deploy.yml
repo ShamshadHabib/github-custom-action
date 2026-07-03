@@ -38,7 +38,7 @@ jobs:
       - name: Load & Cache dependencies
         uses: ./.github/actions/cached-deps
         with:
-          shouldCache: false
+          shouldCache: 'false'
       - name: Build website
         run: npm run build
       - name: Upload artifacts
