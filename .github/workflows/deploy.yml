@@ -10,7 +10,12 @@ jobs:
       - name: Get code
         uses: actions/checkout@v7
       - name: Load & Cache dependencies
+        id: custom-action
         uses: ./.github/actions/cached-deps
+        with:
+          shouldCache: 'FALSE'
+      - name: output selected option
+        run: echo ${{steps.custom-action.outputs.selectedValue}}
       - name: Lint code
         run: npm run lint
   test:

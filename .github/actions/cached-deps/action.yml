@@ -6,6 +6,10 @@ inputs:
     required: false
     default: 'true'
     
+outputs:
+  selectedValue:
+    description: Describe either to cache or not
+    value: ${{steps.install.outputs.selectedoption}}
 runs:
     using: 'composite'
     steps:
@@ -19,7 +23,10 @@ runs:
       - name: input value 
         run: echo "shouldCache ${{inputs.shouldCache}}"
         shell: bash
-      - name: Install dependencies
+      - name: Install 
+        id: install
         if: steps.cache.outputs.cache-hit != 'true' || inputs.shouldCache
-        run: npm ci
+        run: |
+          npm ci
+          echo "selectedoption='${{inputs.shouldCache}}'" >> $GITHUB_OUTPUTS
         shell: bash
