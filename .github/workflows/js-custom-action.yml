@@ -1,0 +1,20 @@
+name: Test Custom Action
+
+on:
+  workflow_dispatch:
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run custom action
+        id: hello
+        uses: ./
+        with:
+          name: "Usman"
+
+      - name: Print output
+        run: echo "${{ steps.hello.outputs.message }}"
