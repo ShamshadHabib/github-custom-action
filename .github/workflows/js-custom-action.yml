@@ -2,7 +2,12 @@ name: Test Custom Action
 
 on:
   workflow_dispatch:
-
+    inputs:
+      username: 
+        description: Enter the user name
+        required: true
+        default: World
+        type: string
 jobs:
   demo:
     runs-on: ubuntu-latest
@@ -17,7 +22,7 @@ jobs:
         id: hello
         uses: ./.github/actions/javascript
         with:
-          name: "Usman"
+          name: ${{inputs.username}}
 
       - name: Print output
         run: echo "${{ steps.hello.outputs.message }}"
