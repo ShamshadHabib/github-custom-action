@@ -1,4 +1,4 @@
-const core = import('@actions/core');
+import * as core from '@actions/core';
 
 try {
     const name = core.getInput('name');
