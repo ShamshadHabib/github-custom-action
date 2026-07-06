@@ -12,7 +12,7 @@ jobs:
 
       - name: Run custom action
         id: hello
-        uses: ./
+        uses: ./.github/actions/javascript
         with:
           name: "Usman"
 
